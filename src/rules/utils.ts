@@ -36,11 +36,16 @@ export const isImage = (mimeType: string) => mimeType.startsWith('image/')
 
 // Basic Scrap Helpers
 export const getTitleOfDoc = (htmlDoc: any) => {
-  const titleEl = htmlDoc.querySelector('title')
-  if (!titleEl) {
-    return null
+  const titleOg = getAttrOfDocElement(htmlDoc, 'meta[property="og:title"]', 'content')
+  if (titleOg) {
+    return titleOg;
   }
-  return titleEl.innerText
+
+  const titleEl = htmlDoc.querySelector('title')
+  if (titleEl) {
+    return titleEl.innerText;
+  }
+  return null
 }
 
 export const getAttrOfDocElement = (htmlDoc: any, query: string, attr: string) => {
