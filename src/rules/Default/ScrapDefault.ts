@@ -7,10 +7,7 @@ export default async (url, htmlDoc, defaultMedia) => {
     baseUrl = url
   }
 
-  console.log('get my change!')
-
   const image = [
-    getAttrOfDocElement(htmlDoc, 'a[href="/"] > img', 'src'),
     getAttrOfDocElement(htmlDoc, 'meta[property="og:logo"]', 'content'),
     getAttrOfDocElement(htmlDoc, 'meta[itemprop="logo"]', 'content'),
     getAttrOfDocElement(htmlDoc, 'img[itemprop="logo"]', 'src'),
@@ -23,6 +20,7 @@ export default async (url, htmlDoc, defaultMedia) => {
     getAttrOfDocElement(htmlDoc, 'meta[name="twitter:image:src"]', 'content'),
     getAttrOfDocElement(htmlDoc, 'meta[name="twitter:image"]', 'content'),
     getAttrOfDocElement(htmlDoc, 'meta[itemprop="image"]', 'content'),
+    getAttrOfDocElement(htmlDoc, 'a[href="/"] > img', 'src'),
   ]
     .filter(i => !isEmpty(i))
     .map(i => fixRelativeUrls(baseUrl, i))
